@@ -6,6 +6,7 @@ public class RegisterRequest {
     private String phone;
     private String password;
     private String confirmPassword;
+    private String role;  // Added role field
     
     // Getters and Setters
     public String getName() {
@@ -46,5 +47,13 @@ public class RegisterRequest {
     
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+     // Add role getter and setter
+     public String getRole() {
+        return role;
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
     }
 }

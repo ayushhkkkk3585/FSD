@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -9,15 +11,23 @@ import jakarta.persistence.Table;
 public class Batch {
 
     @Id
-    private Integer batchId;    // Primary key
+    private Integer batchId; // Primary key
 
-    private String batchName;    // Batch name
-    private String startDate;     // Start date of the batch
-    private String endDate;       // End date of the batch
+    private String batchName; // Batch name
+    private String startDate; // Start date of the batch
+    private String endDate; // End date of the batch
 
     // Default constructor required by Hibernate
     public Batch() {
     }
+
+    @ManyToOne
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
+
+    @ManyToOne
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
 
     // Parameterized constructor
     public Batch(Integer batchId, String batchName, String startDate, String endDate) {
@@ -58,5 +68,21 @@ public class Batch {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 }
