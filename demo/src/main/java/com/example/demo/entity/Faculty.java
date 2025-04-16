@@ -1,38 +1,28 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Faculties")
+@Table(name = "faculties")
 public class Faculty {
-    
     @Id
-    private int facultyId;         // Primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer facultyId;
 
-    private String facultyName;    // Faculty name
-    private String department;      // Department of the faculty
-    private String email;           // Email of the faculty
+    @Column(nullable = false)
+    private String facultyName;
+    
+    private String department;
+    
+    @Column(unique = true)
+    private String email;
 
-    // Default constructor required by Hibernate
-    public Faculty() {
-    }
-
-    // Parameterized constructor
-    public Faculty(int facultyId, String facultyName, String department, String email) {
-        this.facultyId = facultyId;
-        this.facultyName = facultyName;
-        this.department = department;
-        this.email = email;
-    }
-
-    // Getters and setters
-    public int getFacultyId() {
+    // Getters and Setters
+    public Integer getFacultyId() {
         return facultyId;
     }
 
-    public void setFacultyId(int facultyId) {
+    public void setFacultyId(Integer facultyId) {
         this.facultyId = facultyId;
     }
 

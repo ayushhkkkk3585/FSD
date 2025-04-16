@@ -3,6 +3,7 @@ package com.example.demo.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,8 +30,9 @@ public class WebSecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/student/**").hasAuthority("ROLE_STUDENT") // Changed from hasRole
-                .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")    // Changed from hasRole
+                .requestMatchers(HttpMethod.GET, "/api/batches/**").hasAnyAuthority("ROLE_STUDENT", "ROLE_ADMIN")
+                .requestMatchers("/api/student/**").hasAuthority("ROLE_STUDENT")
+                .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated())
             .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         

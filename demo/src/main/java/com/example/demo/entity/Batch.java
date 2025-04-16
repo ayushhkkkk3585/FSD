@@ -1,25 +1,19 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Batches")
+@Table(name = "batches")
 public class Batch {
-
     @Id
-    private Integer batchId; // Primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer batchId;
 
-    private String batchName; // Batch name
-    private String startDate; // Start date of the batch
-    private String endDate; // End date of the batch
-
-    // Default constructor required by Hibernate
-    public Batch() {
-    }
+    @Column(nullable = false)
+    private String batchName;
+    
+    private String startDate;
+    private String endDate;
 
     @ManyToOne
     @JoinColumn(name = "faculty_id")
@@ -29,15 +23,7 @@ public class Batch {
     @JoinColumn(name = "venue_id")
     private Venue venue;
 
-    // Parameterized constructor
-    public Batch(Integer batchId, String batchName, String startDate, String endDate) {
-        this.batchId = batchId;
-        this.batchName = batchName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    // Getters and setters
+    // Getters and Setters
     public Integer getBatchId() {
         return batchId;
     }

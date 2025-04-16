@@ -1,36 +1,22 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Venues")
+@Table(name = "venues")
 public class Venue {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long venueId;  // Primary key
+    private Long venueId;
 
-    private String venueName; // Venue name
-    private String location;   // Location of the venue
-    private int capacity;      // Capacity of the venue
+    @Column(nullable = false)
+    private String venueName;
+    
+    private String location;
+    
+    private Integer capacity;
 
-    // Default constructor required by Hibernate
-    public Venue() {
-    }
-
-    // Parameterized constructor
-    public Venue(Long venueId, String venueName, String location, int capacity) {
-        this.venueId = venueId;
-        this.venueName = venueName;
-        this.location = location;
-        this.capacity = capacity;
-    }
-
-    // Getters and setters
+    // Getters and Setters
     public Long getVenueId() {
         return venueId;
     }
@@ -55,11 +41,11 @@ public class Venue {
         this.location = location;
     }
 
-    public int getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 }
