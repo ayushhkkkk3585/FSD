@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class CustomUserDetails implements UserDetails {
+    
     private final User user;
 
     public CustomUserDetails(User user) {
@@ -17,6 +18,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Return a collection with the user's role prefixed with "ROLE_"
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
 

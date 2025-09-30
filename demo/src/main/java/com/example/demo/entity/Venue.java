@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "venues")
@@ -15,6 +17,10 @@ public class Venue {
     private String location;
     
     private Integer capacity;
+
+    // One-to-Many relationship with Batch (One venue can host many batches)
+    @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Batch> batches = new HashSet<>();
 
     // Getters and Setters
     public Long getVenueId() {
@@ -47,5 +53,24 @@ public class Venue {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public Set<Batch> getBatches() {
+        return batches;
+    }
+
+    public void setBatches(Set<Batch> batches) {
+        this.batches = batches;
+    }
+
+    // Helper methods for bidirectional relationships
+    public void addBatch(Batch batch) {
+        this.batches.add(batch);
+        batch.setVenue(this);
+    }
+
+    public void removeBatch(Batch batch) {
+        this.batches.remove(batch);
+        batch.setVenue(null);
     }
 }

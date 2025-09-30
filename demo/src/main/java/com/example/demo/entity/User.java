@@ -24,6 +24,10 @@ public class User {
     @Column(nullable = false)
     private String role; // ADMIN or STUDENT
 
+    // One-to-One relationship with UserProfile
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserProfile userProfile;
+
     // Constructors
     public User() {
     }
@@ -83,5 +87,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }

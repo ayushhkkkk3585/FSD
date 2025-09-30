@@ -1,22 +1,19 @@
 package com.example.demo.dto;
 
 public class BatchDTO {
+
     private Integer batchId;
     private String batchName;
     private String startDate;
     private String endDate;
-    
-    // Faculty details
     private String facultyName;
     private String facultyEmail;
     private String department;
-    
-    // Venue details
     private String venueName;
     private String venueLocation;
     private Integer capacity;
 
-    // Batch Getters and Setters
+    // Getters and Setters
     public Integer getBatchId() {
         return batchId;
     }
@@ -49,7 +46,6 @@ public class BatchDTO {
         this.endDate = endDate;
     }
 
-    // Faculty Getters and Setters
     public String getFacultyName() {
         return facultyName;
     }
@@ -74,7 +70,6 @@ public class BatchDTO {
         this.department = department;
     }
 
-    // Venue Getters and Setters
     public String getVenueName() {
         return venueName;
     }
